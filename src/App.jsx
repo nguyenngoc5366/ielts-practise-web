@@ -1,34 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import Container from '@mui/material/Container'
+import Home from './pages/Home/_id'
+import Header from '~/components/Header/Header'
+import Register from './pages/Auth/Register'
+import SignIn from './pages/Auth/SignIn'
+import Box from '@mui/material/Box'
+import SideBar from './components/SideBar/SideBar'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Container
+      disableGutters
+      maxWidth={false}
+      sx={{
+        // bgcolor: (theme) => theme.palette.mode == 'dark' ? '#11120fed' : '#F1FFEF'
+        // bgcolor: (theme) => theme.palette.mode == 'dark' ? '#11120fed' : '#FFDCCC'
+      }}
+    >
+      <Box sx={{
+        width: '100%',
+        display: 'flex',
+        position: 'relative',
+        inset: '0px'
+      }}>
+        <SideBar />
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          flex: '1 1 auto'
+        }}>
+          <Header />
+          <Router>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/login' element={<SignIn />} />
+              <Route path='/signup' element={<Register />} />
+            </Routes>
+          </Router>
+        </Box>
+      </Box>
+    </Container>
   )
 }
 
